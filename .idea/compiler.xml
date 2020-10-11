@@ -9,8 +9,8 @@
         <module name="IWatched" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="15">
-      <module name="IWatched" target="1.8" />
+    <bytecodeTargetLevel>
+      <module name="IWatched" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
