@@ -1,7 +1,7 @@
 package com.example.IWatched.web;
 
 import com.example.IWatched.db.User;
-import com.example.IWatched.repos.UserRepository;
+import com.example.IWatched.services.BdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UsersController {
 
   @Autowired
-  private UserRepository userRepository;
+  private BdService<User> userService;
 
   @ResponseBody
   @RequestMapping("/users")
   public String index() {
-    Iterable<User> all = userRepository.findAll();
+    Iterable<User> all = userService.findAll();
 
     StringBuilder sb = new StringBuilder();
 

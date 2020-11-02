@@ -10,18 +10,18 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements BdService<User>{
     private UserRepository userRepository;
 
-    List<User> findAll() {
+    public List<User> findAll() {
         return new ArrayList<User>((Collection<? extends User>) userRepository.findAll());
     }
 
-    User findById(int id){
+    public User findById(int id){
         return userRepository.findById(id).get();
     }
 
-    User save(User user){
+    public User save(User user){
         return userRepository.save(user);
     }
 
