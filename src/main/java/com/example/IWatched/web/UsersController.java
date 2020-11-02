@@ -1,4 +1,4 @@
-package com.example.IWatched;
+package com.example.IWatched.web;
 
 import com.example.IWatched.db.User;
 import com.example.IWatched.repos.UserRepository;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class MainController {
+public class UsersController {
 
   @Autowired
   private UserRepository userRepository;

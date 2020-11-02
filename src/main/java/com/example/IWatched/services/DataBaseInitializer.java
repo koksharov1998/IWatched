@@ -1,4 +1,4 @@
-package com.example.IWatched;
+package com.example.IWatched.services;
 
 import com.example.IWatched.db.User;
 import com.example.IWatched.repos.UserRepository;
@@ -10,12 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataBaseInitializer implements ApplicationRunner {
 
-  private UserRepository userRepository;
-
   @Autowired
-  public void DataInit(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
+  UserService userService;
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
@@ -24,7 +20,7 @@ public class DataBaseInitializer implements ApplicationRunner {
 
     User user2 = new User("Admin");
 
-    userRepository.save(user1);
-    userRepository.save(user2);
+    userService.save(user1);
+    userService.save(user2);
   }
 }
