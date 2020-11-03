@@ -2,11 +2,13 @@ package com.example.IWatched.web;
 
 import com.example.IWatched.db.User;
 import com.example.IWatched.services.UserService;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
@@ -31,7 +33,7 @@ public class RegistrationController {
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
         }
-        if (userService.save(userForm) != null){
+        if (userService.save(userForm) == null){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
