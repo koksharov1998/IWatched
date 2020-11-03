@@ -20,7 +20,7 @@ public class UsersController {
 
     StringBuilder sb = new StringBuilder();
 
-    all.forEach(p -> sb.append(p.getNickname() + "<br>"));
+    all.forEach(p -> sb.append(p.getUsername() + "<br>"));
 
     return sb.toString();
   }
