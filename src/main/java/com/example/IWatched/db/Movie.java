@@ -13,11 +13,21 @@ import javax.persistence.Table;
 @Table(name = "movies")
 public class Movie {
 
+  public Movie() {}
+
+  public Movie(String title, int release_year) {
+    this.title = title;
+    this.release_year = release_year;
+  }
+
   @Id
   @GeneratedValue
   private int id;
 
-  private String title;
+  public String title;
+
+  // TODO: Использовать объект типа даты-времени
+  public int release_year;
 
   @ManyToOne
   @JoinColumn(name = "genre")
@@ -27,8 +37,11 @@ public class Movie {
 
   private String poster;
 
-  // Почему movie, а не movies??
   @OneToMany(mappedBy = "movie")
   private List<Rating> ratings;
+
+  public String toString() {
+    return this.title;
+  }
 
 }

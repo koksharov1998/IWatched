@@ -11,6 +11,8 @@ import javax.persistence.Table;
 @Table(name = "ratings")
 public class Rating {
 
+  public Rating() {}
+
   @Id
   @GeneratedValue
   private int id;

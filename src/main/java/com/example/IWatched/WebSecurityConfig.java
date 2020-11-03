@@ -34,8 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration").not().fullyAuthenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/news").hasRole("USER")
-                .antMatchers("/", "/home", "/h2/*").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/", "/home", "/h2/*", "/movies", "/bootstrap/*","/jquery/*", "/popper/*").permitAll()
+                // TODO: Проблема с незагружающимися стилями для неавторизованных
+                //.anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

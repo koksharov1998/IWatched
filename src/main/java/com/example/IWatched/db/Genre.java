@@ -9,6 +9,8 @@ import javax.persistence.Table;
 @Table(name = "genres")
 public class Genre {
 
+  public Genre() {}
+
   @Id
   @GeneratedValue
   private int id;

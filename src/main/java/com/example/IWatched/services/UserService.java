@@ -1,5 +1,6 @@
 package com.example.IWatched.services;
 
+import com.example.IWatched.db.Movie;
 import com.example.IWatched.db.Role;
 import com.example.IWatched.db.User;
 import com.example.IWatched.repos.UserRepository;
@@ -28,7 +29,7 @@ public class UserService implements BdService<User>, UserDetailsService {
     private EntityManager em;
 
     public List<User> findAll() {
-        return new ArrayList<User>((Collection<? extends User>) userRepository.findAll());
+        return (List<User>) userRepository.findAll();
     }
 
     public User findById(int id) {
