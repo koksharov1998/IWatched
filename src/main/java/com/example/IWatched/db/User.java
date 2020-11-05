@@ -12,9 +12,10 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
 
-  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
+
+  @Id
   @Size(min=2, message = "Не меньше 2 знаков")
   private String username;
 
@@ -27,14 +28,15 @@ public class User implements UserDetails {
 
   @ManyToMany(fetch = FetchType.EAGER)
   private Set<Role> roles;
+
   @Transient
   private String passwordConfirm;
 
   public User() {
   }
 
-  public User(String nickname) {
-    this.username = nickname;
+  public User(String username) {
+    this.username = username;
   }
 
   @Override

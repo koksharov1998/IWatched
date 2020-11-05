@@ -11,6 +11,6 @@
   <td th:utext="${movie.title}">...</td>
   <td th:utext="${movie.release_year}">...</td>
 
-  <img th:src="${movie.poster}" alt=""/>
+  <img th:src="@{'/movies/poster/'+${movieId}}" width="200" height="300" alt="poster"/>
 </body>
 </html>

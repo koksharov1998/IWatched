@@ -11,10 +11,10 @@ public class Genre {
 
   public Genre() {}
 
-  @Id
   @GeneratedValue
   private int id;
 
+  @Id
   private String genre;
 
 }

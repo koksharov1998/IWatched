@@ -47,16 +47,16 @@ public class DataBaseInitializer implements ApplicationRunner {
     List<Movie> movies = new ArrayList<Movie>();
 
     Movie movie = new Movie("Дюна", 2021);
-    movie.addPoster("\\src\\main\\resources\\static\\posters\\Дюна.jpg");
+    movie.addPoster("Дюна.jpg");
     movies.add(movie);
 
 
     movie = new Movie("Довод", 2020);
-    movie.addPoster("\\src\\main\\resources\\static\\posters\\Довод.jpg");
+    movie.addPoster("Довод.jpg");
     movies.add(movie);
 
     movie = new Movie("Ирландец", 2019);
-    movie.addPoster("\\src\\main\\resources\\static\\posters\\Ирландец.jpg");
+    movie.addPoster("Ирландец.jpg");
     movies.add(movie);
 
 
