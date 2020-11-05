@@ -12,9 +12,6 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
 
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
-
   @Id
   @Size(min=2, message = "Не меньше 2 знаков")
   private String username;

@@ -30,20 +30,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration").not().fullyAuthenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/hello").hasRole("USER")
-                .antMatchers("/", "/home", "/h2/*", "/movies", "/bootstrap/*","/jquery/*", "/popper/*").permitAll()
-                // TODO: Проблема с незагружающимися стилями для неавторизованных
-                //.anyRequest().authenticated()
+                .antMatchers("/", "/home", "/h2/**", "/movies", "/bootstrap/**","/jquery/**", "/popper/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
-
-        // Чтобы h2 консоль работала
-        http.headers().frameOptions().sameOrigin();
-        // http.headers().frameOptions().disable();
+                .permitAll()
+                .and()
+                // Чтобы h2 консоль работала
+                .headers().frameOptions().sameOrigin();
     }
 
     @Autowired

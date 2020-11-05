@@ -20,8 +20,13 @@
     <h4><a href="/logout">Выйти</a></h4>
 </th:authorize>
 
+
 <h1>Welcome!</h1>
 
 <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+
+<th:authorize access="!isAuthenticated()">
+    <h4><a href="/movies">Список фильмов</a></h4>
+</th:authorize>
 </body>
 </html>
