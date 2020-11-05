@@ -44,6 +44,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+
+        // Чтобы h2 консоль работала
+        http.headers().frameOptions().sameOrigin();
+        // http.headers().frameOptions().disable();
     }
 
     @Autowired
