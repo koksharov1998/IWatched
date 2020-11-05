@@ -34,10 +34,12 @@ public class DataBaseInitializer implements ApplicationRunner {
     user1.setPassword("lox");
     user1.setPasswordConfirm("lox");
 
-    User user2 = new User("Admin");
+    User admin = new User("Admin");
+    admin.setPassword("admin");
+    admin.setPasswordConfirm("admin");
 
     userService.save(user1);
-    //userService.save(user2);
+    userService.saveAdmin(admin);
     
     UploadSomeMovies();
     

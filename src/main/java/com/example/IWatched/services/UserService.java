@@ -1,11 +1,9 @@
 package com.example.IWatched.services;
 
-import com.example.IWatched.db.Movie;
 import com.example.IWatched.db.Role;
 import com.example.IWatched.db.User;
 import com.example.IWatched.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,10 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService implements BdService<User>, UserDetailsService {
@@ -34,11 +31,6 @@ public class UserService implements BdService<User>, UserDetailsService {
 
     public User findById(int id) {
         return userRepository.findById(id).get();
-    }
-
-    @Autowired
-    public void DataInit(UserRepository userRepository) {
-        this.userRepository = userRepository;
     }
 
     @Override
@@ -63,16 +55,24 @@ public class UserService implements BdService<User>, UserDetailsService {
         return userRepository.save(user);
     }
 
-    public boolean deleteUser(int userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            userRepository.deleteById(userId);
+    public User saveAdmin(User user) {
+        User userFromDB = userRepository.findByUsername(user.getUsername());
+
+        if (userFromDB != null) {
+            return null;
+        }
+
+        user.setRoles(Set.of(new Role(1L, "ROLE_USER"), new Role(2L, "ROLE_ADMIN")));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
+
+    public boolean deleteUser(String username) {
+        User user =  userRepository.findByUsername(username);
+        if (user != null) {
+            userRepository.delete(user);
             return true;
         }
         return false;
-    }
-
-    public List<User> usergtList(int idMin) {
-        return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
-                .setParameter("paramId", idMin).getResultList();
     }
 }
