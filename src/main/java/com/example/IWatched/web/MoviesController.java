@@ -20,12 +20,12 @@ public class MoviesController {
     return "movies";
   }
 
-/*
+
   @GetMapping("/movies/{movieId}")
   public String getMovie(@PathVariable("movieId") int movieId, Model model) {
-    model.addAttribute("allMovies", movieService.movieGetList(movieId));
-    return "movies";
+    model.addAttribute("movie", movieService.findById(movieId));
+    return "movie";
   }
 
- */
+
 }

@@ -1,10 +1,18 @@
 package com.example.IWatched.db;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,7 +30,7 @@ public class Movie {
 
   @Id
   @GeneratedValue
-  private int id;
+  public int id;
 
   public String title;
 
@@ -35,7 +43,8 @@ public class Movie {
 
   private String description;
 
-  private String poster;
+  @Lob
+  public String poster;
 
   @OneToMany(mappedBy = "movie")
   private List<Rating> ratings;
@@ -44,4 +53,12 @@ public class Movie {
     return this.title;
   }
 
+  public void addPoster(String pathToPoster) {
+    try {
+      this.poster = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + pathToPoster)));
+    } catch (IOException e) {
+      e.printStackTrace();
+      System.out.println("Не получилось загрузить постер к фильму по пути: " + pathToPoster);
+    }
+  }
 }

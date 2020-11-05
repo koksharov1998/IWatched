@@ -45,16 +45,31 @@ public class DataBaseInitializer implements ApplicationRunner {
 
   private void UploadSomeMovies() {
     List<Movie> movies = new ArrayList<Movie>();
-    movies.add(new Movie("Довод", 2020));
-    movies.add(new Movie("Дюна", 2020));
-    movies.add(new Movie("Ирландец", 2019));
+
+    Movie movie = new Movie("Дюна", 2021);
+    movie.addPoster("\\src\\main\\resources\\static\\posters\\Дюна.jpg");
+    movies.add(movie);
+
+
+    movie = new Movie("Довод", 2020);
+    movie.addPoster("\\src\\main\\resources\\static\\posters\\Довод.jpg");
+    movies.add(movie);
+
+    movie = new Movie("Ирландец", 2019);
+    movie.addPoster("\\src\\main\\resources\\static\\posters\\Ирландец.jpg");
+    movies.add(movie);
+
+
+  /*
     movies.add(new Movie("Сиротский Бруклин", 2019));
     movies.add(new Movie("Братья Систерс", 2018));
-    movies.add(new Movie("Мстители: Война бесконечности", 2018));
+    movies.add(new Movie("Мстители Война бесконечности", 2018));
     movies.add(new Movie("Дело храбрых", 2017));
     movies.add(new Movie("Джон Уик 2", 2017));
     movies.add(new Movie("Любой ценой", 2016));
-    movies.add(new Movie("Разрушение", 2016));
+    movies.add(new Movie("Разрушение", 2015));
+
+ */
 
     movieRepository.saveAll(movies);
 

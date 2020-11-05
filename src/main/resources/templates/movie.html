@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title th:utext="${movie.title}">Title</title>
+</head>
+
+<body>
+  <td th:utext="${movie.title}">...</td>
+  <td th:utext="${movie.release_year}">...</td>
+
+  <img th:src="${movie.poster}" alt=""/>
+</body>
+</html>
