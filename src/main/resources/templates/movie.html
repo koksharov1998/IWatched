@@ -1,16 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
   <title th:utext="${movie.title}">Title</title>
+
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}"
+        rel="stylesheet" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script th:src="@{/jquery/jquery.min.js}"></script>
+  <script th:src="@{/popper/popper.min.js}"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+  <style type="text/css">
+        body {
+        margin: 7px;
+        }
+        movie {}
+    </style>
 </head>
 
 <body>
-  <td th:utext="${movie.title}">...</td>
-  <td th:utext="${movie.release_year}">...</td>
+  <movie>
+    <td th:utext="${movie.title}">...</td>
+    <td th:utext="${movie.release_year}">...</td>
+    <br>
 
-  <img th:src="@{'/movies/poster/'+${movieId}}" width="200" height="300" alt="poster"/>
+    <img th:src="@{'/movies/poster/'+${movieId}}" width="200" height="300" alt="poster"/>
+  </movie>
 </body>
 </html>

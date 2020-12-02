@@ -12,6 +12,12 @@
   <script th:src="@{/jquery/jquery.min.js}"></script>
   <script th:src="@{/popper/popper.min.js}"></script>
   <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+  <style type="text/css">
+        body {
+        margin: 7px;
+        }
+    </style>
 </head>
 <body>
   <tr th:each ="movie : ${movies}">
