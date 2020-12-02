@@ -20,6 +20,9 @@ public class User implements UserDetails {
 
   private String surname;
 
+  @Lob
+  public byte[] avatar;
+
   @Size(min=2, message = "Не меньше 2 знаков")
   private String password;
 

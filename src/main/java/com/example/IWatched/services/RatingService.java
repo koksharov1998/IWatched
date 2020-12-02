@@ -9,7 +9,10 @@ import java.util.List;
 
 @Service
 public class RatingService implements BdService<Rating>{
+
     private RatingRepository ratingRepository;
+    @Autowired
+    private UserService userService;
 
     @Override
     public List<Rating> findAll() {
@@ -29,5 +32,9 @@ public class RatingService implements BdService<Rating>{
     @Autowired
     public void DataInit(RatingRepository ratingRepository) {
         this.ratingRepository = ratingRepository;
+    }
+
+    public Rating[] findByUsername(String username) {
+        return ratingRepository.findByUser(userService.loadUserByUsername(username));
     }
 }

@@ -13,7 +13,8 @@ public class Rating {
 
   public Rating() {}
 
-  public Rating(Movie movie, float rating, String review) {
+  public Rating(User user, Movie movie, float rating, String review) {
+    this.user = user;
     this.movie = movie;
     this.rating = rating;
     this.review = review;
@@ -29,10 +30,10 @@ public class Rating {
 
   @ManyToOne
   @JoinColumn(name = "movie_id")
-  private Movie movie;
+  public Movie movie;
 
-  private float rating;
+  public float rating;
 
-  private String review;
+  public String review;
 
 }

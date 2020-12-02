@@ -54,4 +54,8 @@ public class Movie {
       System.out.println("Не получилось загрузить постер к фильму по пути: " + pathToPoster);
     }
   }
+
+  public void addPoster(byte[] poster) {
+    this.poster = poster;
+  }
 }

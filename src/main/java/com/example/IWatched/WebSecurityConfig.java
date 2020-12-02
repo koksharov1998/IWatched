@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/registration").not().fullyAuthenticated()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/**", "/movies/add").hasRole("ADMIN")
                 .antMatchers("/hello").hasRole("USER")
                 .antMatchers("/", "/home", "/h2/**", "/movies", "/bootstrap/**","/jquery/**", "/popper/**").permitAll()
                 .anyRequest().authenticated()

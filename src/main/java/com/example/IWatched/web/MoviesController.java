@@ -1,24 +1,30 @@
 package com.example.IWatched.web;
 
 import com.example.IWatched.db.Movie;
+import com.example.IWatched.db.Rating;
 import com.example.IWatched.services.MovieService;
 import com.example.IWatched.services.UserService;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.StringBufferInputStream;
 import java.nio.charset.StandardCharsets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MoviesController {
@@ -50,5 +56,17 @@ public class MoviesController {
         .body(new InputStreamResource(new ByteArrayInputStream(movie.poster)));
   }
 
+  @GetMapping("/movies/add")
+  public String getMovieAddingPage() {
+    return "newMovie";
+  }
 
+  @PostMapping("/movies/add")
+  public String addMovie(@RequestParam("poster") MultipartFile poster, String title, int year, Model model)
+      throws IOException {
+    Movie movie = new Movie(title, year);
+    movie.addPoster(poster.getBytes());
+    movieService.save(movie);
+    return "redirect:/movies/add";
+  }
 }

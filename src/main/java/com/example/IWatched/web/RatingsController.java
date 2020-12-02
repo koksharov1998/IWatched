@@ -4,6 +4,7 @@ import com.example.IWatched.db.Movie;
 import com.example.IWatched.db.Rating;
 import com.example.IWatched.services.MovieService;
 import com.example.IWatched.services.RatingService;
+import com.example.IWatched.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,12 +19,13 @@ public class RatingsController {
   private RatingService ratingService;
   @Autowired
   private MovieService movieService;
+  @Autowired
+  private UserService userService;
 
 
   @PostMapping("/ratings")
-  public String createRating(String username, int movieID, String review, float ratingDigital, Model model, Authentication authentication) {
-    System.out.println((UserDetails)authentication.getPrincipal());
-    ratingService.save(new Rating(movieService.findById(movieID), ratingDigital, review));
+  public String createRating(int movieID, String review, float ratingDigital, Model model, Authentication authentication) {
+    ratingService.save(new Rating(userService.loadUserByUsername(authentication.getName()), movieService.findById(movieID), ratingDigital, review));
     return "redirect:/movies/" + movieID;
   }
 
