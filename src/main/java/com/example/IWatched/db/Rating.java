@@ -13,6 +13,12 @@ public class Rating {
 
   public Rating() {}
 
+  public Rating(Movie movie, float rating, String review) {
+    this.movie = movie;
+    this.rating = rating;
+    this.review = review;
+  }
+
   @Id
   @GeneratedValue
   private int id;
