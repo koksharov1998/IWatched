@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
   <meta charset="UTF-8">
@@ -26,5 +26,9 @@
     </a>
     <td th:utext="${movie.release_year}">...</td>
   </tr>
+
+  <a href='/movies/add' sec:authorize="hasRole('ROLE_ADMIN')">
+    <p>Добавить фильм</p>
+  </a>
 </body>
 </html>
