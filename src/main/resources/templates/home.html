@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Главная страница</title>
 
@@ -19,7 +18,6 @@
     </style>
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
         <a class="navbar-brand mb-0 h1" href="http://localhost:8080">IWatched</a>
 
@@ -57,19 +55,20 @@
     </nav>
 
 
-
-    <th:authorize access="!isAuthenticated()">
+<div sec:authorize="!isAuthenticated()">
         <h4><a href="/login">Войти</a></h4>
         <h4><a href="/registration">Зарегистрироваться</a></h4>
-    </th:authorize>
-    <th:authorize access="isAuthenticated()">
+</div>
+<div sec:authorize="isAuthenticated()">
         <h4><a href="/logout">Выйти</a></h4>
-    </th:authorize>
+</div>
 
+<h1>Welcome!</h1>
 
-    <h1>Welcome!</h1>
+<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
 
-    <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
-
+<th:authorize access="!isAuthenticated()">
+    <h4><a href="/movies">Список фильмов</a></h4>
+</th:authorize>
 </body>
 </html>
