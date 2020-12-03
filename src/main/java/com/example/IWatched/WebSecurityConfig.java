@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration").not().fullyAuthenticated()
                 .antMatchers("/admin/**", "/movies/add").hasRole("ADMIN")
                 .antMatchers("/hello").hasRole("USER")
-                .antMatchers("/", "/home", "/h2/**", "/movies", "/bootstrap/**","/jquery/**", "/popper/**").permitAll()
+                .antMatchers("/", "/home", "/h2/**", "/movies/**", "/bootstrap/**","/jquery/**", "/popper/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
+                .logoutSuccessUrl("http://localhost:8080")
                 .permitAll()
                 .and()
                 // Чтобы h2 консоль работала
