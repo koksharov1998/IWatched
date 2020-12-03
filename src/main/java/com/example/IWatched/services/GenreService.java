@@ -1,6 +1,8 @@
 package com.example.IWatched.services;
 
 import com.example.IWatched.db.Genre;
+import com.example.IWatched.db.Movie;
+import com.example.IWatched.db.Rating;
 import com.example.IWatched.repos.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

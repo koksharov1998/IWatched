@@ -1,5 +1,6 @@
 package com.example.IWatched.services;
 
+import com.example.IWatched.db.Genre;
 import com.example.IWatched.db.Movie;
 import com.example.IWatched.db.User;
 import com.example.IWatched.repos.MovieRepository;
@@ -32,5 +33,9 @@ public class MovieService {
     @Autowired
     public void DataInit(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
+    }
+
+    public Movie[] findByGenre(String genre) {
+        return movieRepository.findByGenre(new Genre(genre));
     }
 }

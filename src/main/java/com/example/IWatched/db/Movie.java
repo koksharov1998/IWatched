@@ -58,4 +58,8 @@ public class Movie {
   public void addPoster(byte[] poster) {
     this.poster = poster;
   }
+
+  public void setGenre(Genre genre) {
+    this.genre = genre;
+  }
 }

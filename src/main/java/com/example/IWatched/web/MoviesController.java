@@ -2,6 +2,7 @@ package com.example.IWatched.web;
 
 import com.example.IWatched.db.Movie;
 import com.example.IWatched.db.Rating;
+import com.example.IWatched.services.GenreService;
 import com.example.IWatched.services.MovieService;
 import com.example.IWatched.services.UserService;
 import java.io.BufferedInputStream;
@@ -31,6 +32,9 @@ public class MoviesController {
 
   @Autowired
   private MovieService movieService;
+
+  @Autowired
+  private GenreService genreService;
 
   @GetMapping("/movies")
   public String movieList(Model model) {
@@ -68,5 +72,13 @@ public class MoviesController {
     movie.addPoster(poster.getBytes());
     movieService.save(movie);
     return "redirect:/movies/add";
+  }
+
+  @PostMapping("/movies")
+  public String getFiltredMovies(String genre, Model model) {
+    if (genre.equals("Все"))
+      return "redirect:/movies";
+    model.addAttribute("movies", movieService.findByGenre(genre));
+    return "movies";
   }
 }
