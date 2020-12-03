@@ -19,21 +19,57 @@
     </style>
 </head>
 <body>
-<th:authorize access="!isAuthenticated()">
-    <h4><a href="/login">Войти</a></h4>
-    <h4><a href="/registration">Зарегистрироваться</a></h4>
-</th:authorize>
-<th:authorize access="isAuthenticated()">
-    <h4><a href="/logout">Выйти</a></h4>
-</th:authorize>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand mb-0 h1" href="http://localhost:8080">IWatched</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://localhost:8080/movies">Фильмы<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://localhost:8080/users">Моя страница<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://localhost:8080/users">Пользователи</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/movies/add">Добавить фильм</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/admin">admin</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Войти</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Зарегистрироваться</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Выйти</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
 
-<h1>Welcome!</h1>
 
-<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+    <th:authorize access="!isAuthenticated()">
+        <h4><a href="/login">Войти</a></h4>
+        <h4><a href="/registration">Зарегистрироваться</a></h4>
+    </th:authorize>
+    <th:authorize access="isAuthenticated()">
+        <h4><a href="/logout">Выйти</a></h4>
+    </th:authorize>
 
-<th:authorize access="!isAuthenticated()">
-    <h4><a href="/movies">Список фильмов</a></h4>
-</th:authorize>
+
+    <h1>Welcome!</h1>
+
+    <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+
 </body>
 </html>
