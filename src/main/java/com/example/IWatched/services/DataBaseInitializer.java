@@ -9,6 +9,7 @@ import com.example.IWatched.repos.RoleRepository;
 import com.example.IWatched.repos.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -31,6 +32,13 @@ public class DataBaseInitializer implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
+
+    // Если в базе данных уже есть роль админа, то можно (?) считать, что базу уже инициализировали,
+    // поэтому можно не проводить инициализацию заново
+    // Возможно можно сделать с другим условием или вовсе как-то иначе
+    if (roleRepository.findById(2L).isPresent())
+      return;
+
     roleRepository.save(new Role(1L, "ROLE_USER"));
     roleRepository.save(new Role(2L, "ROLE_ADMIN"));
 
