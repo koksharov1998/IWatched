@@ -1,5 +1,6 @@
 package com.example.IWatched.db;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -31,6 +32,13 @@ public class User implements UserDetails {
 
   @Transient
   private String passwordConfirm;
+
+  @ManyToMany
+  @JoinColumn(name = "movie_id")
+  private Set<Movie> watchedMovies;
+  @ManyToMany
+  @JoinColumn(name = "movie_id")
+  private Set<Movie> wantedMovies;
 
   public User() {
   }
@@ -96,6 +104,30 @@ public class User implements UserDetails {
 
   public void setPasswordConfirm(String passwordConfirm) {
     this.passwordConfirm = passwordConfirm;
+  }
+
+  public void addMovieToWanted(Movie movie) {
+    this.wantedMovies.add(movie);
+  }
+
+  public void addMovieToWatched(Movie movie) {
+    this.watchedMovies.add(movie);
+  }
+
+  public void deleteMovieFromWanted(Movie movie) {
+    this.wantedMovies.remove(movie);
+  }
+
+  public void deleteMovieFromWatched(Movie movie) {
+    this.watchedMovies.remove(movie);
+  }
+
+  public boolean isMovieWatched(Movie movie) {
+    return this.watchedMovies.contains(movie);
+  }
+
+  public boolean isMovieWanted(Movie movie) {
+    return this.wantedMovies.contains(movie);
   }
 }
 

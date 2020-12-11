@@ -1,8 +1,10 @@
 package com.example.IWatched.web;
 
 import com.example.IWatched.db.Movie;
+import com.example.IWatched.db.Rating;
 import com.example.IWatched.db.User;
 import com.example.IWatched.services.BdService;
+import com.example.IWatched.services.MovieService;
 import com.example.IWatched.services.RatingService;
 import com.example.IWatched.services.UserService;
 import java.io.ByteArrayInputStream;
@@ -13,10 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +32,8 @@ public class UsersController {
   private UserService userService;
   @Autowired
   private RatingService ratingService;
+  @Autowired
+  private MovieService movieService;
 
 
   @ResponseBody
@@ -77,4 +83,31 @@ public class UsersController {
           .body(new InputStreamResource(new ByteArrayInputStream(no_avatar)));
     }
   }
+
+  @PostMapping("/movieState")
+  public String changeState(int movieID, String state, Model model, Authentication authentication) {
+    if (authentication != null) {
+      User user = userService.loadUserByUsername(authentication.getName());
+      Movie movie = movieService.findById(movieID);
+      switch (state) {
+        case "want":
+          user.addMovieToWanted(movie);
+          break;
+        case "watched":
+          user.addMovieToWatched(movie);
+          user.deleteMovieFromWanted(movie);
+          break;
+        case "dontwant":
+          user.deleteMovieFromWanted(movie);
+          break;
+        case "notwatched":
+          user.deleteMovieFromWatched(movie);
+          break;
+      }
+      userService.updateUser(user);
+    }
+    return "redirect:/movies/" + movieID;
+  }
+
+
 }

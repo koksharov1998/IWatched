@@ -75,4 +75,8 @@ public class UserService implements BdService<User>, UserDetailsService {
         }
         return false;
     }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
 }

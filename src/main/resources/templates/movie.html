@@ -20,8 +20,15 @@
     <br>
   </movie>
 
-  <form th:action="@{/ratings}" method="post">
-    <input type="hidden" name="username" value="Stepan"/>
+  <form sec:authorize="isAuthenticated()" th:action="@{/movieState}" method="post">
+    <input type="hidden" name="movieID"  th:value="${movieId}"/>
+    <button th:if="${state == 'nothing'}" type="submit" name="state" value="want">Хочу посмотреть</button>
+    <button th:if="${state == 'wanted'}" type="submit" name="state" value="dontwant">Не хочу смотреть</button>
+    <button th:if="${state == 'nothing' || state == 'wanted'}" type="submit" name="state" value="watched">Посмотрел</button>
+    <button th:if="${state == 'watched'}" type="submit" name="state" value="notwatched">Не смотрел</button>
+  </form>
+
+  <form sec:authorize="isAuthenticated()" th:action="@{/ratings}" method="post">
     <input type="hidden" name="movieID"  th:value="${movieId}"/>
     <textarea name="review" rows="7" cols="25" placeholder="Место для Вашего отзыва"></textarea>
     <br>

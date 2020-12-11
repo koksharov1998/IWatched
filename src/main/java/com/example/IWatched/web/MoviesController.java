@@ -3,6 +3,7 @@ package com.example.IWatched.web;
 import com.example.IWatched.db.Genre;
 import com.example.IWatched.db.Movie;
 import com.example.IWatched.db.Rating;
+import com.example.IWatched.db.User;
 import com.example.IWatched.services.GenreService;
 import com.example.IWatched.services.MovieService;
 import com.example.IWatched.services.UserService;
@@ -37,6 +38,9 @@ public class MoviesController {
   @Autowired
   private GenreService genreService;
 
+  @Autowired
+  private UserService userService;
+
   @GetMapping("/movies")
   public String movieList(Model model) {
     model.addAttribute("movies", movieService.findAll());
@@ -45,8 +49,14 @@ public class MoviesController {
 
 
   @GetMapping("/movies/{movieId}")
-  public String getMovie(@PathVariable("movieId") int movieId, Model model) {
-    model.addAttribute("movie", movieService.findById(movieId));
+  public String getMovie(@PathVariable("movieId") int movieId, Model model, Authentication authentication) {
+    Movie movie = movieService.findById(movieId);
+    model.addAttribute("movie", movie);
+    if (authentication != null) {
+      User user = userService.loadUserByUsername(authentication.getName());
+      model.addAttribute("state", user.isMovieWatched(movie) ? "watched"
+          : user.isMovieWanted(movie) ? "wanted" : "nothing");
+    }
     return "movie";
   }
 
