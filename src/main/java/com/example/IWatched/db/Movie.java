@@ -3,12 +3,15 @@ package com.example.IWatched.db;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,9 +28,11 @@ public class Movie {
   public int release_year;
   @Lob
   public byte[] poster;
-  @ManyToOne
+
+  @ManyToMany
   @JoinColumn(name = "genre")
-  private Genre genre;
+  private Set<Genre> genre;
+
   private String description;
   @OneToMany(mappedBy = "movie")
   private List<Rating> ratings;
@@ -60,6 +65,12 @@ public class Movie {
   }
 
   public void setGenre(Genre genre) {
-    this.genre = genre;
+    Set<Genre> setGenres = new HashSet<Genre>();
+    setGenres.add(genre);
+    this.genre = setGenres;
+  }
+
+  public void setGenres(Set<Genre> genres) {
+    this.genre = genres;
   }
 }

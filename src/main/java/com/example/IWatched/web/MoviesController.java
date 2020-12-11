@@ -1,5 +1,6 @@
 package com.example.IWatched.web;
 
+import com.example.IWatched.db.Genre;
 import com.example.IWatched.db.Movie;
 import com.example.IWatched.db.Rating;
 import com.example.IWatched.services.GenreService;
@@ -61,15 +62,17 @@ public class MoviesController {
   }
 
   @GetMapping("/movies/add")
-  public String getMovieAddingPage() {
+  public String getMovieAddingPage(Model model) {
+    model.addAttribute("genres", genreService.findAll());
     return "newMovie";
   }
 
   @PostMapping("/movies/add")
-  public String addMovie(@RequestParam("poster") MultipartFile poster, String title, int year, Model model)
+  public String addMovie(@RequestParam("poster") MultipartFile poster, String title, int year, String[] genres, Model model)
       throws IOException {
     Movie movie = new Movie(title, year);
     movie.addPoster(poster.getBytes());
+    movie.setGenres(Genre.StringListToGenreSet(genres));
     movieService.save(movie);
     return "redirect:/movies/add";
   }

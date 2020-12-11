@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
   <th:block th:include="fragments/general.html :: headerfiles"> </th:block>
@@ -13,6 +13,11 @@
   <input name="year" placeholder="Год выхода фильма">
 
   <input name="poster" type="file" accept="image/jpeg">
+
+  <tr th:each ="genre : ${genres}">
+    <p><input type="checkbox" th:name="genres" th:value="${genre.genre}" th:utext="${genre.genre}"></p>
+  </tr>
+
 
   <button type="submit">Добавить</button>
 </form>

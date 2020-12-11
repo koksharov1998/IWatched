@@ -8,8 +8,10 @@ import com.example.IWatched.repos.MovieRepository;
 import com.example.IWatched.repos.RoleRepository;
 import com.example.IWatched.repos.UserRepository;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -73,7 +75,10 @@ public class DataBaseInitializer implements ApplicationRunner {
 
     Movie movie = new Movie("Дюна", 2021);
     movie.addPoster("Дюна.jpg");
-    movie.setGenre(fiction);
+    Set<Genre> setGenres = new HashSet<Genre>();
+    setGenres.add(fiction);
+    setGenres.add(drama);
+    movie.setGenres(setGenres);
     movies.add(movie);
 
     movie = new Movie("Довод", 2020);

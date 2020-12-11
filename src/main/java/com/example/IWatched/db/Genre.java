@@ -1,5 +1,7 @@
 package com.example.IWatched.db;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,7 +11,7 @@ import javax.persistence.Table;
 public class Genre {
 
   @Id
-  private String genre;
+  public String genre;
 
   public Genre() {
   }
@@ -18,4 +20,11 @@ public class Genre {
     this.genre = genre;
   }
 
+  public static Set<Genre> StringListToGenreSet(String[] str_genres) {
+    Set<Genre> genres = new HashSet<Genre>();
+    for (String str_genre: str_genres) {
+      genres.add(new Genre(str_genre));
+    }
+    return genres;
+  }
 }
