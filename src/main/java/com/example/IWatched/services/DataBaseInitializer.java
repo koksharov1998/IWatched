@@ -74,7 +74,7 @@ public class DataBaseInitializer implements ApplicationRunner {
 
 
     Movie movie = new Movie("Дюна", 2021);
-    movie.addPoster("Дюна.jpg");
+    movie.addPoster("Dune.jpg");
     Set<Genre> setGenres = new HashSet<Genre>();
     setGenres.add(fiction);
     setGenres.add(drama);
@@ -82,47 +82,47 @@ public class DataBaseInitializer implements ApplicationRunner {
     movies.add(movie);
 
     movie = new Movie("Довод", 2020);
-    movie.addPoster("Довод.jpg");
+    movie.addPoster("Tenet.jpg");
     movie.setGenre(fiction);
     movies.add(movie);
 
     movie = new Movie("Ирландец", 2019);
-    movie.addPoster("Ирландец.jpg");
+    movie.addPoster("The Irishman.jpg");
     movie.setGenre(drama);
     movies.add(movie);
 
     movie = new Movie("Сиротский Бруклин", 2019);
-    movie.addPoster("Сиротский Бруклин.jpg");
+    movie.addPoster("Motherless Brooklyn.jpg");
     movie.setGenre(drama);
     movies.add(movie);
 
     movie = new Movie("Братья Систерс", 2018);
-    movie.addPoster("Братья Систерс.jpg");
+    movie.addPoster("The Sisters Brothers.jpg");
     movie.setGenre(drama);
     movies.add(movie);
 
     movie = new Movie("Мстители Война бесконечности", 2018);
-    movie.addPoster("Мстители Война бесконечности.jpg");
+    movie.addPoster("Avengers Infinity War .jpg");
     movie.setGenre(comics);
     movies.add(movie);
 
     movie = new Movie("Дело храбрых", 2017);
-    movie.addPoster("Дело храбрых.jpg");
+    movie.addPoster("Only the Brave .jpg");
     movie.setGenre(drama);
     movies.add(movie);
 
     movie = new Movie("Джон Уик 2", 2017);
-    movie.addPoster("Джон Уик 2.jpg");
+    movie.addPoster("John Wick Chapter Two .jpg");
     movie.setGenre(thriller);
     movies.add(movie);
 
     movie = new Movie("Любой ценой", 2016);
-    movie.addPoster("Любой ценой.jpg");
+    movie.addPoster("Hell or High Water .jpg");
     movie.setGenre(drama);
     movies.add(movie);
 
     movie = new Movie("Разрушение", 2015);
-    movie.addPoster("Разрушение.jpg");
+    movie.addPoster("Demolition .jpg");
     movie.setGenre(drama);
     movies.add(movie);
 
