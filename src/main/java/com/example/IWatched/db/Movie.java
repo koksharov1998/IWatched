@@ -52,7 +52,7 @@ public class Movie {
   public void addPoster(String pathToPoster) {
     try {
       this.poster = Files.readAllBytes(Paths.get(
-          System.getProperty("user.dir") + "\\src\\main\\resources\\static\\posters\\"
+          System.getProperty("user.dir") + "/src/main/resources/static/posters/"
               + pathToPoster));
     } catch (IOException e) {
       e.printStackTrace();
