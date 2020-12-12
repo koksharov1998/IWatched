@@ -76,7 +76,7 @@ public class UsersController {
     catch (ArrayIndexOutOfBoundsException e)
     {
       byte[] no_avatar = Files.readAllBytes(Paths.get(
-          System.getProperty("user.dir") + "\\src\\main\\resources\\static\\no_avatar.jpg"));
+          System.getProperty("user.dir") + "/src/main/resources/static/no_avatar.jpg"));
       return ResponseEntity.ok()
           .contentLength(no_avatar.length)
           .contentType(MediaType.IMAGE_JPEG)
