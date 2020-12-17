@@ -1,5 +1,6 @@
 package com.example.IWatched.services;
 
+import com.example.IWatched.db.Movie;
 import com.example.IWatched.db.Rating;
 import com.example.IWatched.repos.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,9 @@ public class RatingService implements BdService<Rating>{
 
     public Rating[] findByUsername(String username) {
         return ratingRepository.findByUser(userService.loadUserByUsername(username));
+    }
+
+    public Rating[] findByMovie(Movie movie) {
+        return ratingRepository.findByMovie(movie);
     }
 }

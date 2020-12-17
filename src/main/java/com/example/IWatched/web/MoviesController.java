@@ -6,6 +6,7 @@ import com.example.IWatched.db.Rating;
 import com.example.IWatched.db.User;
 import com.example.IWatched.services.GenreService;
 import com.example.IWatched.services.MovieService;
+import com.example.IWatched.services.RatingService;
 import com.example.IWatched.services.UserService;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -41,6 +42,9 @@ public class MoviesController {
   @Autowired
   private UserService userService;
 
+  @Autowired
+  private RatingService ratingService;
+
   @GetMapping("/movies")
   public String movieList(Model model) {
     model.addAttribute("movies", movieService.findAll());
@@ -57,6 +61,7 @@ public class MoviesController {
       model.addAttribute("state", user.isMovieWatched(movie) ? "watched"
           : user.isMovieWanted(movie) ? "wanted" : "nothing");
     }
+    model.addAttribute("ratings", ratingService.findByMovie(movie));
     return "movie";
   }
 

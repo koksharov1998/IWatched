@@ -1,5 +1,6 @@
 package com.example.IWatched.repos;
 
+import com.example.IWatched.db.Movie;
 import com.example.IWatched.db.Rating;
 import com.example.IWatched.db.User;
 import org.springframework.data.repository.CrudRepository;
@@ -10,5 +11,7 @@ public interface RatingRepository
     extends CrudRepository<Rating, Integer> {
 
   Rating[] findByUser(User username);
+
+  Rating[] findByMovie(Movie movie);
 
 }

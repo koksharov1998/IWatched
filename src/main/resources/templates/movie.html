@@ -42,5 +42,21 @@
     <button type="submit">Create</button>
   </form>
 
+  <br>
+  <p>Отзывы наших пользователей:</p>
+  <br>
+
+  <tr th:each ="rating : ${ratings}">
+
+    <a>Отзыв  пользователя </a><a th:href="@{'/users/' + ${rating.user.username}}"><td th:utext="${rating.user.username}">...</td></a>
+    <br>
+    <textarea disabled th:utext="${rating.review}">...</textarea>
+    <br>
+    <a>Оценка: </a><a th:utext="${rating.rating}"></a>
+    <br>
+    <br>
+
+  </tr>
+
 </body>
 </html>
