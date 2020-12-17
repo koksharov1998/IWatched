@@ -14,6 +14,9 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.StringBufferInputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
@@ -93,10 +96,34 @@ public class MoviesController {
   }
 
   @PostMapping("/movies")
-  public String getFiltredMovies(String genre, Model model) {
+  public String getFiltredMovies(String genre, String movieStatus, Model model, Authentication authentication) {
+    if (movieStatus == null)
+      movieStatus = "Все";
+    if (genre.equals("Все") && movieStatus.equals("Все"))
+        return "redirect:/movies";
+    // TODO: Сделать запрос на уровне базы данных
+    Set<Movie> movies;
     if (genre.equals("Все"))
-      return "redirect:/movies";
-    model.addAttribute("movies", movieService.findByGenre(genre));
+      movies = new HashSet<Movie>(movieService.findAll());
+    else
+      movies = new HashSet<Movie>(Arrays.asList(movieService.findByGenre(genre)));
+    if (authentication != null & !movieStatus.equals("Все")) {
+      User user = userService.loadUserByUsername(authentication.getName());
+      switch (movieStatus)
+      {
+        case "Просмотренные":
+          movies.retainAll(user.getWatchedMovies());
+          break;
+        case "Желаемые к просмотру":
+          movies.retainAll(user.getWantedMovies());
+          break;
+        case "Новые для Вас":
+          movies.removeAll(user.getWantedMovies());
+          movies.removeAll(user.getWatchedMovies());
+          break;
+      }
+    }
+    model.addAttribute("movies", movies.toArray());
     return "movies";
   }
 }

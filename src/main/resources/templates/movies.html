@@ -11,14 +11,24 @@
 <filter>
   <form th:action="@{/movies}" method="post">
     <p>Фильтр по жанру:
-      <select name="genre">
+    <select name="genre">
       <option>Все</option>
       <option>Драма</option>
       <option>Фантастика</option>
       <option>Комикс</option>
       <option>Боевик</option>
     </select>
-      <button type="submit">Фильтровать</button>
+      <a sec:authorize="isAuthenticated()">
+      по вашим ожиданиям\оценке:
+    <select name="movieStatus">
+      <option>Все</option>
+      <option>Просмотренные</option>
+      <option>Желаемые к просмотру</option>
+      <option>Новые для Вас</option>
+    </select>
+      </a>
+    <button type="submit">Фильтровать</button>
+    </p>
   </form>
 </filter>
 

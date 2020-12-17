@@ -36,9 +36,18 @@ public class User implements UserDetails {
   @ManyToMany
   @JoinColumn(name = "movie_id")
   private Set<Movie> watchedMovies;
+
+  public Set<Movie> getWatchedMovies() {
+    return watchedMovies;
+  }
+
   @ManyToMany
   @JoinColumn(name = "movie_id")
   private Set<Movie> wantedMovies;
+
+  public Set<Movie> getWantedMovies() {
+    return wantedMovies;
+  }
 
   public User() {
   }
