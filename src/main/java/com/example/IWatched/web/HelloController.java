@@ -1,12 +1,18 @@
 package com.example.IWatched.web;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@RestController
+@Controller
 public class HelloController {
 
+  public HelloController() {
 
-  public String index() {
-    return "Hello word!";
   }
+
+  @GetMapping("/hello")
+  public String getHello() {
+    return "hello";
+  }
+
 }
