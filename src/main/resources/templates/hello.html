@@ -3,15 +3,25 @@
 
 <head>
     <th:block th:include="fragments/general.html :: headerfiles"> </th:block>
-    <title>Hello World!</title>
+    <title>Приветствуем!</title>
+
+    <style type="text/css">
+        #div1 {
+        text-align: center;
+        margin: 0px 25% 0px 25%;
+        }
+    </style>
 </head>
 
 <body>
 <nav th:replace="fragments/general.html :: navbar"></nav>
 
-    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
+    <div id="div1">
+        <h1 th:inline="text">Приветствуем, [[${#httpServletRequest.remoteUser}]]!</h1>
+        <br>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
 </body>
 </html>
