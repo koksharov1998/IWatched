@@ -1,9 +1,7 @@
 package com.example.IWatched.web;
 
 import com.example.IWatched.db.Movie;
-import com.example.IWatched.db.Rating;
 import com.example.IWatched.db.User;
-import com.example.IWatched.services.BdService;
 import com.example.IWatched.services.MovieService;
 import com.example.IWatched.services.RatingService;
 import com.example.IWatched.services.UserService;
@@ -62,19 +60,16 @@ public class UsersController {
       throws IOException {
     User user = userService.loadUserByUsername(username);
 
-    try
-    {
+    try {
       // TODO: достаём настоящую аватарку
       throw new ArrayIndexOutOfBoundsException();
       /*
       return ResponseEntity.ok()
-          .contentLength(user.avatar.length)
+          .contentLength(user.getAvatar().length)
           .contentType(MediaType.IMAGE_JPEG)
-          .body(new InputStreamResource(new ByteArrayInputStream(user.avatar)));
+          .body(new InputStreamResource(new ByteArrayInputStream(user.getAvatar())));
        */
-    }
-    catch (ArrayIndexOutOfBoundsException e)
-    {
+    } catch (ArrayIndexOutOfBoundsException e) {
       byte[] no_avatar = Files.readAllBytes(Paths.get(
           System.getProperty("user.dir") + "/src/main/resources/static/no_avatar.jpg"));
       return ResponseEntity.ok()

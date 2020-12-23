@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,19 +19,17 @@ import javax.persistence.Table;
 @Table(name = "movies")
 public class Movie {
 
+  @Lob
+  private byte[] poster;
+  // TODO: Использовать объект типа даты-времени
+  private int release_year;
+  private String title;
   @Id
   @GeneratedValue
-  public int id;
-  public String title;
-  // TODO: Использовать объект типа даты-времени
-  public int release_year;
-  @Lob
-  public byte[] poster;
-
+  private int id;
   @ManyToMany
   @JoinColumn(name = "genre")
   private Set<Genre> genre;
-
   private String description;
   @OneToMany(mappedBy = "movie")
   private List<Rating> ratings;
@@ -43,6 +40,14 @@ public class Movie {
   public Movie(String title, int release_year) {
     this.title = title;
     this.release_year = release_year;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String toString() {
@@ -72,5 +77,13 @@ public class Movie {
 
   public void setGenres(Set<Genre> genres) {
     this.genre = genres;
+  }
+
+  public int getRelease_year() {
+    return release_year;
+  }
+
+  public byte[] getPoster() {
+    return poster;
   }
 }

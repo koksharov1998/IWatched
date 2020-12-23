@@ -6,11 +6,9 @@ import com.example.IWatched.db.Role;
 import com.example.IWatched.db.User;
 import com.example.IWatched.repos.MovieRepository;
 import com.example.IWatched.repos.RoleRepository;
-import com.example.IWatched.repos.UserRepository;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -38,8 +36,9 @@ public class DataBaseInitializer implements ApplicationRunner {
     // Если в базе данных уже есть роль админа, то можно (?) считать, что базу уже инициализировали,
     // поэтому можно не проводить инициализацию заново
     // Возможно можно сделать с другим условием или вовсе как-то иначе
-    if (roleRepository.findById(2L).isPresent())
+    if (roleRepository.findById(2L).isPresent()) {
       return;
+    }
 
     roleRepository.save(new Role(1L, "ROLE_USER"));
     roleRepository.save(new Role(2L, "ROLE_ADMIN"));
@@ -59,9 +58,9 @@ public class DataBaseInitializer implements ApplicationRunner {
     genreService.save(new Genre("Фантастика"));
     genreService.save(new Genre("Драма"));
     genreService.save(new Genre("Боевик"));
-    
+
     UploadSomeMovies();
-    
+
   }
 
   private void UploadSomeMovies() {
@@ -71,7 +70,6 @@ public class DataBaseInitializer implements ApplicationRunner {
     Genre fiction = new Genre("Фантастика");
     Genre drama = new Genre("Драма");
     Genre thriller = new Genre("Боевик");
-
 
     Movie movie = new Movie("Дюна", 2021);
     movie.addPoster("Dune.jpg");

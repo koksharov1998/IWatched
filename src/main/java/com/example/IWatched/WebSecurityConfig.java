@@ -13,40 +13,42 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    UserService userService;
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Autowired
+  UserService userService;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/registration").not().fullyAuthenticated()
-                .antMatchers("/admin/**", "/movies/add").hasRole("ADMIN")
-                .antMatchers("/hello").hasRole("USER")
-                .antMatchers("/", "/home", "/h2/**", "/movies/**", "/bootstrap/**","/jquery/**", "/popper/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .logoutSuccessUrl("http://localhost:8080")
-                .permitAll()
-                .and()
-                // Чтобы h2 консоль работала
-                .headers().frameOptions().sameOrigin();
-    }
+  @Bean
+  public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
-    }
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http
+        .csrf()
+        .disable()
+        .authorizeRequests()
+        .antMatchers("/registration").not().fullyAuthenticated()
+        .antMatchers("/admin/**", "/movies/add").hasRole("ADMIN")
+        .antMatchers("/hello").hasRole("USER")
+        .antMatchers("/", "/home", "/h2/**", "/movies/**", "/bootstrap/**", "/jquery/**",
+            "/popper/**").permitAll()
+        .anyRequest().authenticated()
+        .and()
+        .formLogin()
+        .loginPage("/login")
+        .permitAll()
+        .and()
+        .logout()
+        .logoutSuccessUrl("http://localhost:8080")
+        .permitAll()
+        .and()
+        // Чтобы h2 консоль работала
+        .headers().frameOptions().sameOrigin();
+  }
+
+  @Autowired
+  protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
+  }
 }

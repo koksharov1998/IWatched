@@ -1,13 +1,11 @@
 package com.example.IWatched.web;
 
-import com.example.IWatched.db.Movie;
 import com.example.IWatched.db.Rating;
 import com.example.IWatched.services.MovieService;
 import com.example.IWatched.services.RatingService;
 import com.example.IWatched.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,8 +22,10 @@ public class RatingsController {
 
 
   @PostMapping("/ratings")
-  public String createRating(int movieID, String review, float ratingDigital, Model model, Authentication authentication) {
-    ratingService.save(new Rating(userService.loadUserByUsername(authentication.getName()), movieService.findById(movieID), ratingDigital, review));
+  public String createRating(int movieID, String review, float ratingDigital, Model model,
+      Authentication authentication) {
+    ratingService.save(new Rating(userService.loadUserByUsername(authentication.getName()),
+        movieService.findById(movieID), ratingDigital, review));
     return "redirect:/movies/" + movieID;
   }
 

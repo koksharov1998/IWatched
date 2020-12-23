@@ -2,18 +2,13 @@ package com.example.IWatched.web;
 
 import com.example.IWatched.db.Genre;
 import com.example.IWatched.db.Movie;
-import com.example.IWatched.db.Rating;
 import com.example.IWatched.db.User;
 import com.example.IWatched.services.GenreService;
 import com.example.IWatched.services.MovieService;
 import com.example.IWatched.services.RatingService;
 import com.example.IWatched.services.UserService;
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.StringBufferInputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -56,7 +51,8 @@ public class MoviesController {
 
 
   @GetMapping("/movies/{movieId}")
-  public String getMovie(@PathVariable("movieId") int movieId, Model model, Authentication authentication) {
+  public String getMovie(@PathVariable("movieId") int movieId, Model model,
+      Authentication authentication) {
     Movie movie = movieService.findById(movieId);
     model.addAttribute("movie", movie);
     if (authentication != null) {
@@ -74,9 +70,9 @@ public class MoviesController {
     Movie movie = movieService.findById(movieId);
 
     return ResponseEntity.ok()
-        .contentLength(movie.poster.length)
+        .contentLength(movie.getPoster().length)
         .contentType(MediaType.IMAGE_JPEG)
-        .body(new InputStreamResource(new ByteArrayInputStream(movie.poster)));
+        .body(new InputStreamResource(new ByteArrayInputStream(movie.getPoster())));
   }
 
   @GetMapping("/movies/add")
@@ -86,7 +82,8 @@ public class MoviesController {
   }
 
   @PostMapping("/movies/add")
-  public String addMovie(@RequestParam("poster") MultipartFile poster, String title, int year, String[] genres, Model model)
+  public String addMovie(@RequestParam("poster") MultipartFile poster, String title, int year,
+      String[] genres, Model model)
       throws IOException {
     Movie movie = new Movie(title, year);
     movie.addPoster(poster.getBytes());
@@ -96,21 +93,24 @@ public class MoviesController {
   }
 
   @PostMapping("/movies")
-  public String getFiltredMovies(String genre, String movieStatus, Model model, Authentication authentication) {
-    if (movieStatus == null)
+  public String getFiltredMovies(String genre, String movieStatus, Model model,
+      Authentication authentication) {
+    if (movieStatus == null) {
       movieStatus = "Все";
-    if (genre.equals("Все") && movieStatus.equals("Все"))
-        return "redirect:/movies";
+    }
+    if (genre.equals("Все") && movieStatus.equals("Все")) {
+      return "redirect:/movies";
+    }
     // TODO: Сделать запрос на уровне базы данных
     Set<Movie> movies;
-    if (genre.equals("Все"))
+    if (genre.equals("Все")) {
       movies = new HashSet<Movie>(movieService.findAll());
-    else
+    } else {
       movies = new HashSet<Movie>(Arrays.asList(movieService.findByGenre(genre)));
+    }
     if (authentication != null & !movieStatus.equals("Все")) {
       User user = userService.loadUserByUsername(authentication.getName());
-      switch (movieStatus)
-      {
+      switch (movieStatus) {
         case "Просмотренные":
           movies.retainAll(user.getWatchedMovies());
           break;

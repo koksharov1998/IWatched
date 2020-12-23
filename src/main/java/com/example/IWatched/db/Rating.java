@@ -11,7 +11,20 @@ import javax.persistence.Table;
 @Table(name = "ratings")
 public class Rating {
 
-  public Rating() {}
+  @Id
+  @GeneratedValue
+  private int id;
+  @ManyToOne
+  @JoinColumn(name = "nickname")
+  private User user;
+  @ManyToOne
+  @JoinColumn(name = "movie_id")
+  private Movie movie;
+  private float rating;
+  private String review;
+
+  public Rating() {
+  }
 
   public Rating(User user, Movie movie, float rating, String review) {
     this.user = user;
@@ -20,20 +33,19 @@ public class Rating {
     this.review = review;
   }
 
-  @Id
-  @GeneratedValue
-  private int id;
+  public User getUser() {
+    return user;
+  }
 
-  @ManyToOne
-  @JoinColumn(name = "nickname")
-  public User user;
+  public Movie getMovie() {
+    return movie;
+  }
 
-  @ManyToOne
-  @JoinColumn(name = "movie_id")
-  public Movie movie;
+  public float getRating() {
+    return rating;
+  }
 
-  public float rating;
-
-  public String review;
-
+  public String getReview() {
+    return review;
+  }
 }

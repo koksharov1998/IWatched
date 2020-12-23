@@ -3,14 +3,14 @@
 
 <head>
   <th:block th:include="fragments/general.html :: headerfiles"> </th:block>
-  <title th:utext="${movie.title}">Title</title>
+  <title th:utext="${movie.getTitle()}">Title</title>
 </head>
 <body>
 <nav th:replace="fragments/general.html :: navbar"></nav>
 
   <movie>
-    <td th:utext="${movie.title}">...</td>
-    <td th:utext="${movie.release_year}">...</td>
+    <td th:utext="${movie.getTitle()}">...</td>
+    <td th:utext="${movie.getRelease_year()}">...</td>
     <br>
     <br>
 
@@ -48,11 +48,11 @@
 
   <tr th:each ="rating : ${ratings}">
 
-    <a>Отзыв  пользователя </a><a th:href="@{'/users/' + ${rating.user.username}}"><td th:utext="${rating.user.username}">...</td></a>
+    <a>Отзыв  пользователя </a><a th:href="@{'/users/' + ${rating.getUser().username}}"><td th:utext="${rating.getUser().username}">...</td></a>
     <br>
-    <textarea disabled th:utext="${rating.review}">...</textarea>
+    <textarea disabled th:utext="${rating.getReview()}">...</textarea>
     <br>
-    <a>Оценка: </a><a th:utext="${rating.rating}"></a>
+    <a>Оценка: </a><a th:utext="${rating.getRating()}"></a>
     <br>
     <br>
 

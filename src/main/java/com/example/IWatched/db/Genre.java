@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Genre {
 
   @Id
-  public String genre;
+  private String genre;
 
   public Genre() {
   }
@@ -22,9 +22,13 @@ public class Genre {
 
   public static Set<Genre> StringListToGenreSet(String[] str_genres) {
     Set<Genre> genres = new HashSet<Genre>();
-    for (String str_genre: str_genres) {
+    for (String str_genre : str_genres) {
       genres.add(new Genre(str_genre));
     }
     return genres;
+  }
+
+  public String getGenre() {
+    return genre;
   }
 }

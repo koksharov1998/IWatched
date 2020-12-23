@@ -3,25 +3,25 @@
 
 <head>
   <th:block th:include="fragments/general.html :: headerfiles"> </th:block>
-  <title th:utext="${user.username}">Title</title>
+  <title th:utext="${user.getUsername()}">Title</title>
 </head>
 
 <body>
 <nav th:replace="fragments/general.html :: navbar"></nav>
 
-<img th:src="@{'/users/avatars/'+${user.username}}" width="200" height="200" alt="avatar"/>
+<img th:src="@{'/users/avatars/'+${user.getUsername()}}" width="200" height="200" alt="avatar"/>
 <br>
-<p th:utext="${user.username}">...</p>
+<p th:utext="${user.getUsername()}">...</p>
 <br>
 <br>
 
 <tr th:each ="rating : ${ratings}">
 
-  <a>Отзыв на фильм </a><a th:href="@{'/movies/' + ${rating.movie.id}}"><td th:utext="${rating.movie.title}">...</td></a>
+  <a>Отзыв на фильм </a><a th:href="@{'/movies/' + ${rating.getMovie().getId()}}"><td th:utext="${rating.getMovie().getTitle()}">...</td></a>
   <br>
-  <textarea disabled th:utext="${rating.review}">...</textarea>
+  <textarea disabled th:utext="${rating.getReview()}">...</textarea>
   <br>
-  <a>Оценка: </a><a th:utext="${rating.rating}"></a>
+  <a>Оценка: </a><a th:utext="${rating.getRating()}"></a>
 
 </tr>
 

@@ -15,7 +15,7 @@
   <input name="poster" type="file" accept="image/jpeg">
 
   <tr th:each ="genre : ${genres}">
-    <p><input type="checkbox" th:name="genres" th:value="${genre.genre}" th:utext="${genre.genre}"></p>
+    <p><input type="checkbox" th:name="genres" th:value="${genre.getGenre()}" th:utext="${genre.getGenre()}"></p>
   </tr>
 
 

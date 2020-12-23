@@ -35,10 +35,10 @@
 <movies>
   <tr th:each ="movie : ${movies}">
     <movie style="margin: 5px; padding: 5px; float: left;">
-      <img th:src="@{'/movies/poster/'+${movie.id}}" width="100" height="150" alt="poster"/>
+      <img th:src="@{'/movies/poster/'+${movie.getId()}}" width="100" height="150" alt="poster"/>
       <br>
-      <a th:href="@{'/movies/' + ${movie.id}}"><td th:utext="${movie.title}"></td></a>
-      <td th:utext="${movie.release_year}">...</td>
+      <a th:href="@{'/movies/' + ${movie.getId()}}"><td th:utext="${movie.getTitle()}"></td></a>
+      <td th:utext="${movie.getRelease_year()}">...</td>
     </movie>
   </tr>
 </movies>
