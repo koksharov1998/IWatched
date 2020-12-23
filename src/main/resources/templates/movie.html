@@ -17,6 +17,8 @@
     <img th:src="@{'/movies/poster/'+${movieId}}" width="200" height="300" alt="poster"/>
 
     <br>
+    <td th:utext="${movie.getDescription()}">...</td>
+    <br>
     <br>
   </movie>
 

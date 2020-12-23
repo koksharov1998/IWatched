@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -30,7 +31,11 @@ public class Movie {
   @ManyToMany
   @JoinColumn(name = "genre")
   private Set<Genre> genre;
+
+  @Lob
+  @Column(columnDefinition="CLOB")
   private String description;
+
   @OneToMany(mappedBy = "movie")
   private List<Rating> ratings;
 
@@ -85,5 +90,13 @@ public class Movie {
 
   public byte[] getPoster() {
     return poster;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 }
